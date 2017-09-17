@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - FitCard Teste</title>
+    @Styles.Render("~/Content/css")
+    <!-- Custom styles for this template -->
+    <link href="~/Content/style.css?v=@Guid.NewGuid()" rel="stylesheet">
+    <link href="~/Content/style-responsive.css" rel="stylesheet" />
+
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="mega-nav">
+    <section id="container" class="">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("FitCard", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#">
+                                <i class="fa fa-building"></i> Estabelecimentos <b class="fa fa-angle-down"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index","Estabelecimento")">Lista</a></li>
+                                <li><a href="@Url.Action("Index","Categoria")">Categorias</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <section id="main-content">
+            <section class="wrapper">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Teste FitCard</p>
+                </footer>
+            </section>
+        </section>
+    </section>
+    <div class="loading-screen">
+        <div class="vertical-center">
+            <span style="font-size:40px;margin-right:10px;color:#FFF;">FITCARD</span>
+            <i class="fa fa-spinner fa-pulse fa-4x text-white"></i>
+        </div>
+    </div>
+    
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts")
+
+    <!--common script for all pages-->
+    <script src="~/Scripts/common-scripts.js?v=@Guid.NewGuid()" id="customScript" data-path=""></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

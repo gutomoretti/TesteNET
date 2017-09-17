@@ -1,0 +1,52 @@
+CREATE TABLE `categoria` (
+  `IDCategoria` int(11) NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(100) NOT NULL,
+  `Status` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`IDCategoria`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `cidade` (
+  `IDCidade` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(120) DEFAULT NULL,
+  `IDEstado` int(5) DEFAULT NULL,
+  PRIMARY KEY (`IDCidade`),
+  KEY `fk_Cidade_estado` (`IDEstado`),
+  CONSTRAINT `FK_Cidade_IDEstado` FOREIGN KEY (`IDEstado`) REFERENCES `estado` (`IDEstado`)
+) ENGINE=InnoDB AUTO_INCREMENT=5565 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `estabelecimento` (
+  `IDEstabelecimento` int(11) NOT NULL AUTO_INCREMENT,
+  `IDCategoria` int(11) NOT NULL,
+  `RazaoSocial` varchar(200) NOT NULL,
+  `NomeFantasia` varchar(180) DEFAULT NULL,
+  `CNPJ` varchar(30) NOT NULL,
+  `Email` varchar(150) DEFAULT NULL,
+  `Endereco` varchar(150) DEFAULT NULL,
+  `IDEstado` int(11) DEFAULT NULL,
+  `IDCidade` int(11) DEFAULT NULL,
+  `Telefone` varchar(20) DEFAULT NULL,
+  `DataCadastro` datetime DEFAULT NULL,
+  `Status` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`IDEstabelecimento`),
+  KEY `FK_CidadeEstabelecimento` (`IDCidade`),
+  KEY `FK_EstadoEstabelecimento` (`IDEstado`),
+  KEY `FK_CategoriaEstabelecimento` (`IDCategoria`),
+  CONSTRAINT `FK_CategoriaEstabelecimento` FOREIGN KEY (`IDCategoria`) REFERENCES `categoria` (`IDCategoria`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `estado` (
+  `IDEstado` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(75) DEFAULT NULL,
+  `uf` varchar(5) DEFAULT NULL,
+  `IDPais` int(7) DEFAULT NULL,
+  PRIMARY KEY (`IDEstado`),
+  KEY `fk_Estado_pais` (`IDPais`),
+  CONSTRAINT `FK_Estado_IDPais` FOREIGN KEY (`IDPais`) REFERENCES `pais` (`IDPais`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `pais` (
+  `IDPais` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(60) DEFAULT NULL,
+  `sigla` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`IDPais`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
